@@ -1,0 +1,43 @@
+lab1-cse@lab1-cse-HP-Elite-Tower-600-G9-Desktop-PC:~/Compiler_Design_96/Assignment4$ g++ q1.cpp -o q1
+lab1-cse@lab1-cse-HP-Elite-Tower-600-G9-Desktop-PC:~/Compiler_Design_96/Assignment4$ ./q1
+Enter the input string: abdce
+LL(1) parsing table
+
+
+                       a           b           c           d           e           f           $
+------------------------------------------------------------------------------------------------
+           S     S->aABe                                                                        
+           A                  A->bAc                    A->d                                    
+           B                                                         B->        B->f            
+
+Stack		Input		Action
+S$		abdce$		S -> aABe
+aABe$		abdce$		Match a
+ABe$		bdce$		A -> bAc
+bAcBe$		bdce$		Match b
+AcBe$		dce$		A -> d
+dcBe$		dce$		Match d
+cBe$		ce$		Match c
+Be$		e$		B -> epsilon
+e$		e$		Match e
+
+
+
+lab1-cse@lab1-cse-HP-Elite-Tower-600-G9-Desktop-PC:~/Compiler_Design_96/Assignment4$ g++ q1.cpp -o q1
+lab1-cse@lab1-cse-HP-Elite-Tower-600-G9-Desktop-PC:~/Compiler_Design_96/Assignment4$ ./q1
+Enter the input string: abcde
+LL(1) parsing table
+
+
+                       a           b           c           d           e           f           $
+------------------------------------------------------------------------------------------------
+           S     S->aABe                                                                        
+           A                  A->bAc                    A->d                                    
+           B                                                         B->        B->f            
+
+Stack		Input		Action
+S$		abcde$		S -> aABe
+aABe$		abcde$		Match a
+ABe$		bcde$		A -> bAc
+bAcBe$		bcde$		Match b
+AcBe$		cde$		Error: No rule found
