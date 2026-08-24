@@ -1,0 +1,13 @@
+lab1-cse@lab1-cse-HP-Elite-Tower-600-G9-Desktop-PC:~/Compiler_Design_96/Assignment4$ g++ q2b.cpp -o q2b
+lab1-cse@lab1-cse-HP-Elite-Tower-600-G9-Desktop-PC:~/Compiler_Design_96/Assignment4$ ./q2b
+Original Grammar:
+E->E+T | T
+T->T*F | F
+F->(E) | id
+
+Grammar after removing left recursion:
+E->TE'
+E'->+TE'|epsilon
+T->FT'
+T'->*FT'|epsilon
+F->(E)|id
