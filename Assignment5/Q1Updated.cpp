@@ -1,12 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
-
 using Item = pair<int, int>;
-
-
-
 
 vector<pair<char, string>> g = {
     {'Z', "S"},
@@ -38,16 +33,15 @@ set<Item> closure(set<Item> s) {
             int d = x.second;     
 
 
-            // Check whether dot is before a symbol
+
             if (d < (int)g[p].second.size()) {
 
                 char c = g[p].second[d];
 
 
-                // If symbol after dot is a non-terminal
+
                 if (nt(c)) {
 
-                    // Add all productions of that non-terminal
                     for (int i = 0; i < (int)g.size(); i++) {
 
                         if (g[i].first == c) {
@@ -70,9 +64,6 @@ set<Item> closure(set<Item> s) {
 }
 
 
-// ---------------------------------------------------------
-// GOTO
-// ---------------------------------------------------------
 
 set<Item> go(set<Item> s, char c) {
 
@@ -84,11 +75,10 @@ set<Item> go(set<Item> s, char c) {
         int d = x.second;
 
 
-        // If dot is before c
+
         if (d < (int)g[p].second.size() &&
             g[p].second[d] == c) {
 
-            // Move dot one position to the right
             t.insert({p, d + 1});
         }
     }
@@ -96,10 +86,6 @@ set<Item> go(set<Item> s, char c) {
     return closure(t);
 }
 
-
-// ---------------------------------------------------------
-// CREATE UNIQUE KEY FOR ITEM SET
-// ---------------------------------------------------------
 
 string key(set<Item> s) {
 
@@ -117,9 +103,6 @@ string key(set<Item> s) {
 }
 
 
-// ---------------------------------------------------------
-// CONVERT ITEM INTO STRING
-// ---------------------------------------------------------
 
 string item(Item x) {
 
@@ -134,12 +117,12 @@ string item(Item x) {
 
     for (int i = 0; i <= (int)g[p].second.size(); i++) {
 
-        // Print dot
+
         if (i == d)
             r += ".";
 
 
-        // Print grammar symbol
+
         if (i < (int)g[p].second.size())
             r += g[p].second[i];
     }
@@ -148,9 +131,6 @@ string item(Item x) {
 }
 
 
-// ---------------------------------------------------------
-// DISPLAY ITEM SET
-// ---------------------------------------------------------
 
 void show(set<Item> s, int id) {
 
@@ -165,9 +145,6 @@ void show(set<Item> s, int id) {
 }
 
 
-// ---------------------------------------------------------
-// GET ACTION
-// ---------------------------------------------------------
 
 string getAction(map<char, string>& a, char c) {
 
@@ -178,9 +155,7 @@ string getAction(map<char, string>& a, char c) {
 }
 
 
-// ---------------------------------------------------------
-// GET GOTO
-// ---------------------------------------------------------
+
 
 string getGoto(map<char, int>& h, char c) {
 
@@ -191,9 +166,6 @@ string getGoto(map<char, int>& h, char c) {
 }
 
 
-// ---------------------------------------------------------
-// ADD ACTION + DETECT CONFLICT
-// ---------------------------------------------------------
 
 void addAction(
     map<char, string>& action,
@@ -202,10 +174,7 @@ void addAction(
     int state
 ) {
 
-    /*
-        If there is no action already,
-        simply insert the new action.
-    */
+
 
     if (!action.count(symbol)) {
 
@@ -217,18 +186,11 @@ void addAction(
     string oldAction = action[symbol];
 
 
-    /*
-        Same action is not a conflict.
-    */
 
     if (oldAction == newAction)
         return;
 
 
-    /*
-        Determine whether the actions are
-        SHIFT or REDUCE.
-    */
 
     bool oldShift  = oldAction[0] == 's';
     bool newShift  = newAction[0] == 's';
@@ -237,9 +199,7 @@ void addAction(
     bool newReduce = newAction[0] == 'r';
 
 
-    // -----------------------------------------------------
-    // SHIFT / REDUCE CONFLICT
-    // -----------------------------------------------------
+
 
     if ((oldShift && newReduce) ||
         (oldReduce && newShift)) {
@@ -254,25 +214,13 @@ void addAction(
         cout << "Existing action  : " << oldAction << "\n";
         cout << "New action       : " << newAction << "\n";
 
-        /*
-            Conflict resolution:
-
-            SHIFT is preferred.
-        */
+ 
 
         if (oldShift) {
-
-            // Already have SHIFT.
-            // Keep it.
-
             cout << "Resolution       : SHIFT chosen\n";
         }
         else {
-
-            // New action is SHIFT.
-            // Replace REDUCE with SHIFT.
-
-            action[symbol] = newAction;
+        action[symbol] = newAction;
 
             cout << "Resolution       : SHIFT chosen\n";
         }
@@ -282,10 +230,6 @@ void addAction(
         return;
     }
 
-
-    // -----------------------------------------------------
-    // REDUCE / REDUCE CONFLICT
-    // -----------------------------------------------------
 
     if (oldReduce && newReduce) {
 
@@ -300,12 +244,6 @@ void addAction(
         cout << "New action       : " << newAction << "\n";
 
 
-        /*
-            For demonstration:
-
-            Choose the production with
-            the smaller production number.
-        */
 
         int oldProduction =
             stoi(oldAction.substr(1));
@@ -327,9 +265,6 @@ void addAction(
     }
 
 
-    // -----------------------------------------------------
-    // OTHER CONFLICT
-    // -----------------------------------------------------
 
     cout << "\n";
     cout << "==============================================\n";
@@ -345,15 +280,11 @@ void addAction(
 }
 
 
-// ---------------------------------------------------------
-// MAIN
-// ---------------------------------------------------------
+
 
 int main() {
 
-    // =====================================================
-    // STEP 1: CONSTRUCT CANONICAL COLLECTION
-    // =====================================================
+
 
     set<Item> start = closure({{0, 0}});
 
@@ -366,19 +297,13 @@ int main() {
     id[key(start)] = 0;
 
 
-    /*
-        Generate all LR(0) states.
-    */
 
     for (int i = 0; i < (int)states.size(); i++) {
 
         set<char> symbols;
 
 
-        /*
-            Find all symbols appearing immediately
-            after a dot.
-        */
+
 
         for (auto x : states[i]) {
 
@@ -395,9 +320,6 @@ int main() {
         }
 
 
-        /*
-            Compute GOTO for every symbol.
-        */
 
         for (char c : symbols) {
 
@@ -411,10 +333,6 @@ int main() {
             string k = key(next);
 
 
-            /*
-                If this item set has not appeared before,
-                create a new state.
-            */
 
             if (!id.count(k)) {
 
@@ -428,9 +346,6 @@ int main() {
     }
 
 
-    // =====================================================
-    // STEP 2: DISPLAY LR(0) ITEM SETS
-    // =====================================================
 
     cout << "\n";
     cout << "==============================================\n";
@@ -446,9 +361,6 @@ int main() {
     }
 
 
-    // =====================================================
-    // STEP 3: CONSTRUCT PARSING TABLE
-    // =====================================================
 
     vector<map<char, string>> action(states.size());
 
@@ -460,9 +372,6 @@ int main() {
         set<char> symbols;
 
 
-        /*
-            Collect symbols appearing after dots.
-        */
 
         for (auto x : states[i]) {
 
@@ -479,9 +388,6 @@ int main() {
         }
 
 
-        // -------------------------------------------------
-        // SHIFT AND GOTO
-        // -------------------------------------------------
 
         for (char c : symbols) {
 
@@ -495,10 +401,6 @@ int main() {
             int j = id[key(next)];
 
 
-            /*
-                Non-terminal -> GOTO
-                Terminal     -> SHIFT
-            */
 
             if (nt(c)) {
 
@@ -516,9 +418,6 @@ int main() {
         }
 
 
-        // -------------------------------------------------
-        // REDUCE / ACCEPT
-        // -------------------------------------------------
 
         for (auto x : states[i]) {
 
@@ -526,17 +425,9 @@ int main() {
             int d = x.second;
 
 
-            /*
-                Dot at the end means
-                completed production.
-            */
+
 
             if (d == (int)g[p].second.size()) {
-
-
-                // -----------------------------------------
-                // ACCEPT
-                // -----------------------------------------
 
                 if (p == 0) {
 
@@ -548,21 +439,9 @@ int main() {
                     );
                 }
 
-
-                // -----------------------------------------
-                // REDUCE
-                // -----------------------------------------
-
                 else {
 
-                    string reduceAction =
-                        "r" + to_string(p);
-
-
-                    /*
-                        In LR(0), reduction is placed
-                        under every terminal.
-                    */
+                    string reduceAction ="r" + to_string(p);
 
                     for (char c : {'a', 'b', '$'}) {
 
@@ -577,11 +456,6 @@ int main() {
             }
         }
     }
-
-
-    // =====================================================
-    // STEP 4: DISPLAY PARSING TABLE
-    // =====================================================
 
     cout << "\n";
     cout << "==============================================\n";
@@ -627,34 +501,13 @@ int main() {
 
     cout << "+-------+----------+----------+----------+----------+----------+\n";
 
-
-    // =====================================================
-    // STEP 5: DISPLAY PRODUCTIONS
-    // =====================================================
-
     cout << "\nProductions:\n";
 
     cout << "r1 = S -> A\n";
     cout << "r2 = A -> Ab\n";
     cout << "r3 = A -> a\n";
 
-
-    // =====================================================
-    // STEP 6: PARSE INPUT STRING
-    // =====================================================
-
     string input = "abb$";
-
-
-    /*
-        Stack contains alternating:
-
-        state symbol state symbol state ...
-
-        Initially:
-
-        0
-    */
 
     vector<string> st;
 
@@ -679,24 +532,19 @@ int main() {
 
     while (true) {
 
-        // Current state
+
         int state = stoi(st.back());
 
 
-        // Current input symbol
+
         char c = input[pos];
 
 
-        // Get ACTION[state, input]
+
         string act = getAction(
             action[state],
             c
         );
-
-
-        // -------------------------------------------------
-        // DISPLAY STACK
-        // -------------------------------------------------
 
         string stackText;
 
@@ -708,11 +556,6 @@ int main() {
 
             stackText += x;
         }
-
-
-        // -------------------------------------------------
-        // ACCEPT
-        // -------------------------------------------------
 
         if (act == "acc") {
 
@@ -734,11 +577,6 @@ int main() {
             break;
         }
 
-
-        // -------------------------------------------------
-        // ERROR
-        // -------------------------------------------------
-
         if (act == "-") {
 
             cout << "| "
@@ -758,11 +596,6 @@ int main() {
 
             break;
         }
-
-
-        // -------------------------------------------------
-        // SHIFT
-        // -------------------------------------------------
 
         if (act[0] == 's') {
 
@@ -789,36 +622,16 @@ int main() {
 
                  << " |\n";
 
-
-            /*
-                Push terminal.
-            */
-
             st.push_back(
                 string(1, c)
             );
-
-
-            /*
-                Push next state.
-            */
 
             st.push_back(
                 to_string(nextState)
             );
 
-
-            /*
-                Move input pointer.
-            */
-
             pos++;
         }
-
-
-        // -------------------------------------------------
-        // REDUCE
-        // -------------------------------------------------
 
         else if (act[0] == 'r') {
 
@@ -856,22 +669,6 @@ int main() {
 
                  << " |\n";
 
-
-            /*
-                RHS length = n
-
-                For every grammar symbol,
-                stack contains:
-
-                    symbol + state
-
-                Therefore remove:
-
-                    2 * n
-
-                entries.
-            */
-
             for (int j = 0;
                  j < 2 * (int)rhs.size();
                  j++) {
@@ -879,27 +676,12 @@ int main() {
                 st.pop_back();
             }
 
-
-            /*
-                Get state now on top.
-            */
-
             state =
                 stoi(st.back());
-
-
-            /*
-                Push LHS non-terminal.
-            */
 
             st.push_back(
                 string(1, lhs)
             );
-
-
-            /*
-                Push GOTO state.
-            */
 
             st.push_back(
                 to_string(goTo[state][lhs])
