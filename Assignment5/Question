@@ -1,0 +1,5 @@
+
+1) Consider the following grammar and construct LR(0) parsing table. 
+Also, parse the input string 𝑎𝑏𝑏 using the parse table.
+𝑆 → 𝐴
+𝐴 → 𝐴𝑏 | 𝑎
