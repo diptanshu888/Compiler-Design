@@ -1,0 +1,1 @@
+1) To design and implement a syntax checker and evaluator for a basic configuration language or subset of a scripting language that supports variable assignments and dynamic variable evaluation using the Bison parser generator and Flex lexical analyzer.
