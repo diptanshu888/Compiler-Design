@@ -1,0 +1,43 @@
+lab1-cse@lab1-cse-HP-Elite-Tower-600-G9-Desktop-PC:~/Compiler_Design_96/Assignment6$ ./config_parser
+=====================================
+ Configuration Language Evaluator
+=====================================
+
+Enter statements:
+Example:
+x = 10;
+y = 20;
+z = x + y;
+result = z * 2;
+
+x=30
+y=80
+Syntax Error: syntax error
+
+----- Symbol Table -----
+lab1-cse@lab1-cse-HP-Elite-Tower-600-G9-Desktop-PC:~/Compiler_Design_96/Assignment6$ ./config_parser
+=====================================
+ Configuration Language Evaluator
+=====================================
+
+Enter statements:
+Example:
+x = 10;
+y = 20;
+z = x + y;
+result = z * 2;
+
+x=80;
+x = 80
+y=50;
+y = 50
+z=y-x;
+z = -30
+result=50*x;
+result = 4000
+
+----- Symbol Table -----
+x = 80
+y = 50
+z = -30
+result = 4000
