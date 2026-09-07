@@ -1,0 +1,23 @@
+lab1-cse@lab1-cse-HP-Elite-Tower-600-G9-Desktop-PC:~/Compiler_Design_96/Assignment6/Q2$ ./math_validator
+=====================================
+ Mathematical Expression Validator
+=====================================
+
+Enter a mathematical expression:
+Example: (10 + 20) * (5 - 2)
+
+(((10+50)*2-100)+40)
+
+Valid expression.
+Result = 60
+
+lab1-cse@lab1-cse-HP-Elite-Tower-600-G9-Desktop-PC:~/Compiler_Design_96/Assignment6/Q2$ ./math_validator
+=====================================
+ Mathematical Expression Validator
+=====================================
+
+Enter a mathematical expression:
+Example: (10 + 20) * (5 - 2)
+
+(((((7+9)
+Syntax Error: syntax error
