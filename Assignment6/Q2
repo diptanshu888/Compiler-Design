@@ -1,0 +1,1 @@
+2) Design and implement a syntax analyzer and semantic validator that processes and evaluates nested parentheses balance and mathematical structural formatting using the Bison parser generator and Flex lexical analyzer.
