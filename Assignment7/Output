@@ -1,0 +1,87 @@
+lab1-cse@lab1-cse-HP-Elite-Tower-600-G9-Desktop-PC:~/Compiler_Design_96/Assignment7$ g++ semantic.cpp -o semantic
+lab1-cse@lab1-cse-HP-Elite-Tower-600-G9-Desktop-PC:~/Compiler_Design_96/Assignment7$ ./semantic
+=====================================
+     SEMANTIC ANALYZER USING AST
+=====================================
+
+Enter number of declarations: 3
+
+Enter declarations:
+Example: a int
+
+a int
+b float
+c bool
+
+Symbol Table:
+-------------
+a : int
+b : float
+c : bool
+
+Enter assignment expression:
+Example: b = a + 5
+
+b=a-10
+
+Tokens:
+-------
+[b] [=] [a] [-] [10] 
+
+Parsing successful.
+
+Abstract Syntax Tree:
+---------------------
+=
+  b
+  -
+    a
+    10 : int
+
+Semantic Analysis:
+------------------
+Semantic Error: Cannot assign int to variable 'b' of type float.
+lab1-cse@lab1-cse-HP-Elite-Tower-600-G9-Desktop-PC:~/Compiler_Design_96/Assignment7$ g++ semantic.cpp -o semantic
+lab1-cse@lab1-cse-HP-Elite-Tower-600-G9-Desktop-PC:~/Compiler_Design_96/Assignment7$ ./semantic
+=====================================
+     SEMANTIC ANALYZER USING AST
+=====================================
+
+Enter number of declarations: 3
+
+Enter declarations:
+Example: a int
+
+a int
+b float
+c bool
+
+Symbol Table:
+-------------
+a : int
+b : float
+c : bool
+
+Enter assignment expression:
+Example: b = a + 5
+
+b=a+5.5
+
+Tokens:
+-------
+[b] [=] [a] [+] [5.5] 
+
+Parsing successful.
+
+Abstract Syntax Tree:
+---------------------
+=
+  b
+  +
+    a
+    5.5 : float
+
+Semantic Analysis:
+------------------
+No semantic errors found.
+Expression is type correct.
