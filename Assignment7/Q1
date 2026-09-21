@@ -1,0 +1,1 @@
+Write a program to implement a semantic analyzer that performs type checking, and semantic error detection on an Abstract Syntax Tree (AST) produced by a parser.
