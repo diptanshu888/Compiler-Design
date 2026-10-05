@@ -1,0 +1,11 @@
+Write a program that accepts an arithmetic expression or a simple assignment statement (e.g., a = b + c * d).
+
+(a) Performs lexical analysis and parsing (you may use a recursive descent parser or operator-precedence parsing).
+
+(b) Generates Three-Address Code for the given expression.
+
+(c) Optionally converts the Three-Address Code into Quadruple and Triple representations.
+
+(d) Handles basic operators: +, -, *, /, and assignment =.
+
+(e) Use temporary variables (e.g., t1, t2, …) for intermediate results.
