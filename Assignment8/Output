@@ -1,0 +1,33 @@
+lab1-cse@lab1-cse-HP-Elite-Tower-600-G9-Desktop-PC:~/Compiler_Design_96/Assignment8$ ./q1
+Enter expression: x=y+g-h*v
+
+Tokens:
+(id, x)
+(assign, =)
+(id, y)
+(op, +)
+(id, g)
+(op, -)
+(id, h)
+(op, *)
+(id, v)
+
+Three Address Code:
+t1 = y + g
+t2 = h * v
+t3 = t1 - t2
+x = t3
+
+Quadruple:
+Op	Arg1	Arg2	Result
++	y	g	t1
+*	h	v	t2
+-	t1	t2	t3
+=	t3	-	x
+
+Triple:
+Index	Op	Arg1	Arg2
+0	+	y	g
+1	*	h	v
+2	-	(0)	(1)
+3	=	(2)	-
