@@ -1,0 +1,8 @@
+cat << 'EOF' > input.txt
+int main() {
+    float x = 10.5;
+    if (x >= 5) {
+        x<<=1;
+    }
+}
+EOF
