@@ -7,7 +7,7 @@
 %%
 [ \t\r\n]+              ;   
 [0-9]+                  {
-                            yyval.num=atoi(yytext);
+                            yylval.num=atoi(yytext);
                             return NUMBER;
                         }
 
