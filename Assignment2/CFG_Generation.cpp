@@ -46,7 +46,7 @@ int main()
         cout << "S -> " << bestPattern << "S\n";
 
         if (bestSuffix.empty())
-            cout << "S -> ε\n";
+            cout << "S -> epsilon\n";
         else
             cout << "S -> " << bestSuffix << endl;
 
