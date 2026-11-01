@@ -1,0 +1,7 @@
+sudo apt update
+sudo apt install flex bison gcc build-essential
+
+bison -d parser.y
+flex lexer.l
+gcc parser.tab.c lex.yy.c -o evaluator -lfl
+./evaluator
