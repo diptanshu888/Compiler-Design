@@ -5,3 +5,9 @@ bison -d parser.y
 flex lexer.l
 gcc parser.tab.c lex.yy.c -o evaluator -lfl
 ./evaluator
+
+
+normal lexxer:
+flex lexer.l
+gcc lex.yy.c -o lexer
+./lexer < input.txt
